@@ -5,8 +5,8 @@ import express from "express"
 import { authMiddleware } from "#middleware/authMiddleware.js"
 import { current } from "#controllers/controllerCurrent.js"
 import { validateSchema } from "#validation/joi.js"
-
-
+import { updateAvatar } from "#controllers/controllerUpdateAvatar.js"
+import { uploadMiddleware } from "#middleware/uploadMiddleware.js"
 
 
 
@@ -16,6 +16,7 @@ router.post('/signup', validateSchema, signUp)
 router.post('/login', validateSchema, login)
 router.get('/logout', authMiddleware, logout)
 router.get('/current', authMiddleware, current)
+router.patch('/avatars', authMiddleware, uploadMiddleware.single("picture"), updateAvatar)
 
 
 export default router

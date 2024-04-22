@@ -1,6 +1,8 @@
 import { User } from "#models/userSchema.js"
+import gravatar from "gravatar"
+
 export const signUp = async (req, res, next) => {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
     const user = await User.findOne({ email }).lean();
     if (user) {
         return res.status(409).json({
@@ -11,7 +13,8 @@ export const signUp = async (req, res, next) => {
         })
     }
     try {
-        const newUser = new User({ username, email });
+        const avatarURL = gravatar.url(email)
+        const newUser = new User({ email, avatarURL });
         newUser.setPassword(password);
         await newUser.save();
         res.status(201).json({

@@ -1,17 +1,21 @@
 import app from "./app.js"
 import dotenv from 'dotenv'
 import mongoose from "mongoose";
+import path from "path";
+import { setupFolder } from "./helpers/helpers.js";
 dotenv.config()
 
 const { HOST_DB: uriDb } = process.env;
 const connection = mongoose.connect(uriDb);
 
+const storeImageDir = path.join(process.cwd(), "public/avatars");
+
 async function startServer() {
   try {
     await connection;
-    console.log('DB connected')
-    app.listen(3000, function () {
+    app.listen(3000, async () => {
       console.log("Server running. Use our API on port: 3000")
+      await setupFolder(storeImageDir);
     })
   } catch (err) {
     console.log("DB not connected, shutting down");
