@@ -16,7 +16,7 @@ router.post('/signup', validateSchema, signUp)
 router.post('/login', validateSchema, login)
 router.get('/logout', authMiddleware, logout)
 router.get('/current', authMiddleware, current)
-router.patch('/avatars', authMiddleware, uploadMiddleware.single("picture"), updateAvatar)
+router.patch('/avatars', authMiddleware, uploadMiddleware.any, updateAvatar)
 
 
 export default router
