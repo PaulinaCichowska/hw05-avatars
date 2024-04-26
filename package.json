@@ -14,7 +14,8 @@
     "#models/*": "./models/*",
     "#validation/*": "./validation/*",
     "#middleware/*": "./middleware/*",
-    "#routes/*": "./routes/*"
+    "#routes/*": "./routes/*",
+    "#helpers/*": "./helpers/*"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
